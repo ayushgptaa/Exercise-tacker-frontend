@@ -3,18 +3,10 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 import convertDate from '../../utils/convertDate'
+import BoldText from '../BoldText'
 
 const DisplayWorkouts = () => {
   const [data, setData] = useState([])
-
-  const RenderItem = ({ item }) => {
-    return (
-      <View style={styles.workout}>
-        <Text>Workout Name : {item.dayName}</Text>
-        <Text>Created at : {convertDate(item.createdAt)}</Text>
-      </View>
-    )
-  }
 
   useEffect(() => {
     var config = {
@@ -32,10 +24,19 @@ const DisplayWorkouts = () => {
       })
   }, [])
 
+  const RenderItem = ({ item }) => {
+    return (
+      <View style={styles.workout}>
+        <Text>Workout Name : {item.dayName}</Text>
+        <Text>Created at : {convertDate(item.createdAt)}</Text>
+      </View>
+    )
+  }
+
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <View>
-        <Text>My workouts</Text>
+        <BoldText>My workouts</BoldText>
       </View>
       <FlatList data={data} renderItem={RenderItem} keyExtractor={(item) => item._id} />
     </SafeAreaView>
@@ -43,10 +44,15 @@ const DisplayWorkouts = () => {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    marginTop: 20,
+  },
+
   workout: {
     padding: 30,
-    backgroundColor: '#f0f0f0',
-    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#c7c7c7',
+    borderRadius: 6,
     marginTop: 10,
   },
 })

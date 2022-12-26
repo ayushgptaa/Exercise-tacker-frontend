@@ -5,7 +5,7 @@ import Home from './screens/home'
 export default function App() {
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
+      {/* <StatusBar style="auto" /> */}
       <Home />
     </View>
   )
@@ -14,6 +14,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 50,
-    margin: 10,
+    margin: 20,
   },
 })
