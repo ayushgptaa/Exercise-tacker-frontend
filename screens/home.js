@@ -24,6 +24,23 @@ const Home = () => {
       })
   }
 
+  const deleteWorkouts = (id) => {
+    var config = {
+      method: 'delete',
+      url: `http://192.168.1.9:3000/api/workouts/${id}`,
+      headers: {},
+    }
+
+    axios(config)
+      .then(function (response) {
+        getWorkouts()
+        console.log(JSON.stringify(response.data))
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+
   useEffect(() => {
     getWorkouts()
   }, [])
@@ -31,7 +48,7 @@ const Home = () => {
   return (
     <View>
       <CreateWorkout getWorkouts={getWorkouts} />
-      <DisplayWorkouts workouts={workouts} />
+      <DisplayWorkouts workouts={workouts} deleteWorkouts={deleteWorkouts} />
     </View>
   )
 }

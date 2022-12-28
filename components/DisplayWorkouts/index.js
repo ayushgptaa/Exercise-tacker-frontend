@@ -1,15 +1,21 @@
-import { Text, FlatList, View, SafeAreaView, StyleSheet } from 'react-native'
+import { Text, FlatList, View, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import BoldText from '../BoldText'
 
 import convertDate from '../../utils/convertDate'
 
-const DisplayWorkouts = ({ workouts }) => {
+const DisplayWorkouts = ({ workouts, deleteWorkouts }) => {
   const RenderItem = ({ item }) => {
     return (
       <View style={styles.workout}>
-        <Text>Workout Name : {item.dayName}</Text>
-        <Text>Created at : {convertDate(item.createdAt)}</Text>
+        <View>
+          <Text>Workout Name : {item.dayName}</Text>
+          <Text>Created at : {convertDate(item.createdAt)}</Text>
+        </View>
+        <TouchableOpacity onPress={() => deleteWorkouts(item._id)}>
+          <Icon name="delete" size={22} color="#000" />
+        </TouchableOpacity>
       </View>
     )
   }
@@ -30,6 +36,10 @@ const styles = StyleSheet.create({
   },
 
   workout: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     padding: 30,
     borderWidth: 1,
     borderColor: '#c7c7c7',
