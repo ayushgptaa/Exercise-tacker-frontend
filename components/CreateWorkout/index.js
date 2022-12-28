@@ -5,7 +5,7 @@ import axios from 'axios'
 import BoldText from '../BoldText'
 import CustomButton from '../CustomButton'
 
-export const CreateWorkout = () => {
+const CreateWorkout = ({ getWorkouts }) => {
   const [input, setInput] = useState('')
 
   const onPress = () => {
@@ -25,6 +25,7 @@ export const CreateWorkout = () => {
 
     axios(config)
       .then(function (response) {
+        getWorkouts()
         console.log(JSON.stringify(response.data))
       })
       .catch(function (error) {
@@ -64,3 +65,5 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 })
+
+export default CreateWorkout
