@@ -9,7 +9,6 @@ const CreateWorkout = ({ getWorkouts }) => {
   const [input, setInput] = useState('')
 
   const onPress = () => {
-    console.log(input)
     var data = JSON.stringify({
       dayName: input,
     })
@@ -51,7 +50,7 @@ const CreateWorkout = ({ getWorkouts }) => {
 
 const styles = StyleSheet.create({
   input: {
-    padding: 5,
+    padding: 10,
     paddingLeft: 10,
     borderWidth: 1,
     borderColor: '#c7c7c7',

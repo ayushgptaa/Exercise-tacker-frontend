@@ -5,27 +5,39 @@ import BoldText from '../BoldText'
 
 import convertDate from '../../utils/convertDate'
 
-const DisplayWorkouts = ({ workouts, deleteWorkouts }) => {
-  const RenderItem = ({ item }) => {
-    return (
-      <View style={styles.workout}>
-        <View>
-          <Text>Workout Name : {item.dayName}</Text>
-          <Text>Created at : {convertDate(item.createdAt)}</Text>
-        </View>
-        <TouchableOpacity onPress={() => deleteWorkouts(item._id)}>
-          <Icon name="delete" size={22} color="#000" />
-        </TouchableOpacity>
+const RenderItem = ({ item, deleteWorkouts }) => {
+  return (
+    <View style={styles.workout}>
+      <View>
+        <Text>Workout Name : {item.dayName}</Text>
+        <Text>Created at : {convertDate(item.createdAt)}</Text>
       </View>
-    )
-  }
+      <TouchableOpacity onPress={() => deleteWorkouts(item._id)}>
+        <Icon name="delete" size={22} color="#000" />
+      </TouchableOpacity>
+    </View>
+  )
+}
 
+const DisplayWorkouts = ({ workouts, deleteWorkouts, navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
         <BoldText>My workouts</BoldText>
       </View>
-      <FlatList data={workouts} renderItem={RenderItem} keyExtractor={(item) => item._id} />
+
+      <FlatList
+        data={workouts}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('IndWorkout', { item })
+            }}>
+            <RenderItem item={item} deleteWorkouts={deleteWorkouts} />
+          </TouchableOpacity>
+        )}
+        keyExtractor={(item) => item._id}
+      />
     </SafeAreaView>
   )
 }

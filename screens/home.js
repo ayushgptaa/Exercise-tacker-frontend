@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import { View } from 'react-native'
 import axios from 'axios'
 
 import CreateWorkout from '../components/CreateWorkout'
 import DisplayWorkouts from '../components/DisplayWorkouts'
+import Container from '../components/Container'
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const [workouts, setWorkouts] = useState([])
 
   const getWorkouts = () => {
@@ -46,10 +46,10 @@ const Home = () => {
   }, [])
 
   return (
-    <View>
+    <Container>
       <CreateWorkout getWorkouts={getWorkouts} />
-      <DisplayWorkouts workouts={workouts} deleteWorkouts={deleteWorkouts} />
-    </View>
+      <DisplayWorkouts workouts={workouts} deleteWorkouts={deleteWorkouts} navigation={navigation} />
+    </Container>
   )
 }
 
