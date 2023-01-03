@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { View, StyleSheet, TextInput } from 'react-native'
-import axios from 'axios'
+
+import fetchReq from '../../utils/fetchReq'
 
 import BoldText from '../BoldText'
 import CustomButton from '../CustomButton'
@@ -8,12 +9,12 @@ import CustomButton from '../CustomButton'
 const CreateWorkout = ({ getWorkouts }) => {
   const [input, setInput] = useState('')
 
-  const onPress = () => {
+  const onPress = async () => {
     var data = JSON.stringify({
       dayName: input,
     })
 
-    var config = {
+    const config = {
       method: 'post',
       url: 'http://192.168.1.9:3000/api/workouts',
       headers: {
@@ -22,14 +23,8 @@ const CreateWorkout = ({ getWorkouts }) => {
       data: data,
     }
 
-    axios(config)
-      .then(function (response) {
-        getWorkouts()
-        console.log(JSON.stringify(response.data))
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
+    await fetchReq(config)
+    await getWorkouts()
   }
 
   return (
