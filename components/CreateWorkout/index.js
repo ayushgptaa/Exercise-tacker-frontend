@@ -34,21 +34,20 @@ const CreateWorkout = ({ getWorkouts }) => {
 
   return (
     <View>
-      <BoldText>CreateWorkout</BoldText>
+      <BoldText>Create Workout</BoldText>
       <TextInput
         style={styles.input}
-        placeholder="Enter a new exercise"
+        placeholder="Enter a new workout"
         value={input}
         setInput
         onChangeText={(text) => setInput(text)}
       />
       <CustomButton onPress={onPress}>Create a new workout</CustomButton>
-      <View></View>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   input: {
     padding: 10,
     paddingLeft: 10,
