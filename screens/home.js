@@ -16,7 +16,7 @@ const Home = ({ navigation }) => {
   const deleteWorkouts = async (id) => {
     const config = {
       method: 'delete',
-      url: `http://192.168.1.9:3000/api/workouts/${id}`,
+      url: `http://192.168.0.138:3000/api/workouts/${id}`,
     }
     const response = await fetchReq(config)
     if (response.status === 200) {
@@ -37,5 +37,4 @@ const Home = ({ navigation }) => {
     </Container>
   )
 }
-
 export default Home

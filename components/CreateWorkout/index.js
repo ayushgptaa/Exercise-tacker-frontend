@@ -16,14 +16,14 @@ const CreateWorkout = ({ getWorkouts }) => {
 
     const config = {
       method: 'post',
-      url: 'http://192.168.1.9:3000/api/workouts',
+      url: 'http://192.168.0.138:3000/api/workouts',
       headers: {
         'Content-Type': 'application/json',
       },
       data: data,
     }
 
-    await fetchReq(config)
+    const res = await fetchReq(config)
     await getWorkouts()
   }
 

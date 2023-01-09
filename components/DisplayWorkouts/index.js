@@ -1,4 +1,4 @@
-import { Text, FlatList, View, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, FlatList, View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import BoldText from '../BoldText'
@@ -21,7 +21,7 @@ const RenderItem = ({ item, deleteWorkouts }) => {
 
 const DisplayWorkouts = ({ workouts, deleteWorkouts, navigation }) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View>
         <BoldText>My workouts</BoldText>
       </View>
@@ -37,26 +37,29 @@ const DisplayWorkouts = ({ workouts, deleteWorkouts, navigation }) => {
           </TouchableOpacity>
         )}
         keyExtractor={(item) => item._id}
+        horizontal={false}
       />
-    </SafeAreaView>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
+    paddingBottom: 40,
   },
 
   workout: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
     padding: 30,
     borderWidth: 1,
     borderColor: '#c7c7c7',
     borderRadius: 6,
-    marginTop: 10,
+    marginTop: 12,
+    marginBottom: 10,
   },
 })
 

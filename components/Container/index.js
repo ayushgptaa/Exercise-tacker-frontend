@@ -7,7 +7,7 @@ const Container = ({ children }) => {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 50,
-    margin: 20,
+    margin: 25,
   },
 })
 
