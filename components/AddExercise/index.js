@@ -1,14 +1,14 @@
 import { View, TextInput } from 'react-native'
 import { useState } from 'react'
-import axios from 'axios'
 
 import BoldText from '../BoldText'
 import CustomButton from '../CustomButton'
 
 import { styles } from '../CreateWorkout'
+
 import fetchReq from '../../utils/fetchReq'
 
-const AddExercise = ({ id }) => {
+const AddExercise = ({ id, getExercises }) => {
   const [input, setInput] = useState('')
 
   const onPress = async () => {
@@ -18,14 +18,15 @@ const AddExercise = ({ id }) => {
 
     const config = {
       method: 'post',
-      url: `http://192.168.1.9:3000/api/workouts/add-exercise/${id}`,
+      url: `http://192.168.0.138:3000/api/workouts/add-exercise/${id}`,
       headers: {
         'Content-Type': 'application/json',
       },
       data: data,
     }
 
-    await fetchReq(config)
+    const response = await fetchReq(config)
+    if (response.status === 200) await getExercises()
   }
 
   return (
