@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { View, StyleSheet, TextInput } from 'react-native'
 
-import fetchReq from '../../utils/fetchReq'
-
 import BoldText from '../BoldText'
 import CustomButton from '../CustomButton'
+
+import API_URL from '../../constant'
+
+import fetchReq from '../../utils/fetchReq'
 
 const CreateWorkout = ({ getWorkouts }) => {
   const [input, setInput] = useState('')
@@ -16,7 +18,7 @@ const CreateWorkout = ({ getWorkouts }) => {
 
     const config = {
       method: 'post',
-      url: 'http://192.168.0.138:3000/api/workouts',
+      url: `${API_URL}/workouts`,
       headers: {
         'Content-Type': 'application/json',
       },

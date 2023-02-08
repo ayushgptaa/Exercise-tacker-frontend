@@ -1,9 +1,11 @@
 import axios from 'axios'
 
+import API_URL from '../constant'
+
 const fetchReq = async (config) => {
   const defaultConfig = {
     method: 'get',
-    url: 'http://192.168.0.138:3000/api/workouts',
+    url: `${API_URL}/workouts`,
     headers: {
       'Content-Type': 'application/json',
     },

@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react'
 import CreateWorkout from '../components/CreateWorkout'
 import DisplayWorkouts from '../components/DisplayWorkouts'
 import Container from '../components/Container'
+
+import API_URL from '../constant'
+
 import fetchReq from '../utils/fetchReq'
 
 const Home = ({ navigation }) => {
@@ -16,7 +19,7 @@ const Home = ({ navigation }) => {
   const deleteWorkouts = async (id) => {
     const config = {
       method: 'delete',
-      url: `http://192.168.0.138:3000/api/workouts/${id}`,
+      url: `${API_URL}/workouts/${id}`,
     }
     const response = await fetchReq(config)
     if (response.status === 200) {

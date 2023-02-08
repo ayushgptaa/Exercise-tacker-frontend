@@ -4,6 +4,8 @@ import AddExercise from '../components/AddExercise'
 import Container from '../components/Container'
 import DisplayExercises from '../components/DisplayExercises'
 
+import API_URL from '../constant'
+
 import fetchReq from '../utils/fetchReq'
 
 const IndWorkout = ({ route }) => {
@@ -14,7 +16,7 @@ const IndWorkout = ({ route }) => {
   const getExercises = async () => {
     const config = {
       method: 'get',
-      url: `http://192.168.0.138:3000/api/workouts/${_id}`,
+      url: `${API_URL}/workouts/${_id}`,
     }
 
     const res = await fetchReq(config)

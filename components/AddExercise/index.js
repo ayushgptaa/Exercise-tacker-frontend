@@ -6,6 +6,8 @@ import CustomButton from '../CustomButton'
 
 import { styles } from '../CreateWorkout'
 
+import API_URL from '../../constant'
+
 import fetchReq from '../../utils/fetchReq'
 
 const AddExercise = ({ id, getExercises }) => {
@@ -18,7 +20,7 @@ const AddExercise = ({ id, getExercises }) => {
 
     const config = {
       method: 'post',
-      url: `http://192.168.0.138:3000/api/workouts/add-exercise/${id}`,
+      url: `${API_URL}/workouts/add-exercise/${id}`,
       headers: {
         'Content-Type': 'application/json',
       },
