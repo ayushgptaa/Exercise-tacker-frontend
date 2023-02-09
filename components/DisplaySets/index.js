@@ -1,35 +1,22 @@
-import { View, Text, StyleSheet, FlatList, ListItem } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
-// const data = [
-//   { key: '1', name: 'John', age: '20' },
-//   { key: '2', name: 'Jane', age: '24' },
-//   { key: '3', name: 'Bob', age: '30' },
-// ]
+import SetInputs from '../SetInputs'
 
-// const TableRow = () => {}
+const CenterText = ({ children }) => {
+  return <Text style={styles.center}>{children}</Text>
+}
 
-// const Table = () => (
-//   <FlatList
-//     data={data}
-//     renderItem={({ item }) => (
-//       <ListItem>
-//         <Text>{item.key}</Text>
-//         <Text>{item.name}</Text>
-//         <Text>{item.age}</Text>
-//       </ListItem>
-//     )}
-//   />
-// )
-
-const DisplaySets = () => {
+const DisplaySets = ({ sets, removeSet }) => {
   return (
     <View style={styles.container}>
       <View style={styles.flex}>
-        <Text>SET</Text>
-        <Text>KG</Text>
-        <Text>REPS</Text>
+        <CenterText>SET</CenterText>
+        <CenterText>KG</CenterText>
+        <CenterText>REPS</CenterText>
+        <CenterText />
       </View>
-      <Text>DisplaySets</Text>
+
+      <SetInputs sets={sets} removeSet={removeSet} />
     </View>
   )
 }
@@ -43,6 +30,13 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+
+  center: {
+    textAlign: 'left',
+    flex: 1,
+    fontSize: 12,
   },
 })
 
