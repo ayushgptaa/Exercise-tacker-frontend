@@ -37,7 +37,7 @@ const IndWorkout = ({ route }) => {
         {dayName} ({convertDay(createdAt)} {convertDate(createdAt)})
       </Text>
       <AddExercise id={_id} getExercises={getExercises} />
-      <DisplayExercises exercises={exercises} />
+      <DisplayExercises exercises={exercises} getExercises={getExercises} />
     </Container>
   )
 }

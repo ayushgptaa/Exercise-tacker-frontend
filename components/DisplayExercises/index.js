@@ -3,7 +3,32 @@ import { Text, FlatList, View, ScrollView, StyleSheet, TouchableOpacity } from '
 import BoldText from '../BoldText'
 import DisplaySets from '../DisplaySets'
 
-const RenderItem = ({ exercise }) => {
+import API_URL from '../../constant'
+
+import fetchReq from '../../utils/fetchReq'
+
+const RenderItem = ({ exercise, getExercises }) => {
+  var data = JSON.stringify([
+    {
+      weight: 0,
+      reps: 0,
+    },
+  ])
+
+  const addNewSet = async () => {
+    const config = {
+      method: 'post',
+      url: `${API_URL}/workouts/add-sets/${exercise._id}`,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    }
+
+    const response = await fetchReq(config)
+
+    if (response.status === 200) await getExercises()
+  }
   return (
     <View style={styles.workout}>
       <View>
@@ -12,18 +37,14 @@ const RenderItem = ({ exercise }) => {
 
       <DisplaySets sets={exercise.sets} />
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => addNewSet()}>
         <Text style={styles.btnText}>Add set</Text>
       </TouchableOpacity>
-
-      {/* <TouchableOpacity onPress={() => deleteWorkouts(item._id)}>
-        <Icon name="delete" size={22} color="#000" />
-      </TouchableOpacity> */}
     </View>
   )
 }
 
-const DisplayExercises = ({ exercises }) => {
+const DisplayExercises = ({ exercises, getExercises }) => {
   return (
     <View style={styles.container}>
       <View>
@@ -32,7 +53,7 @@ const DisplayExercises = ({ exercises }) => {
 
       <FlatList
         data={exercises}
-        renderItem={({ item }) => <RenderItem exercise={item} />}
+        renderItem={({ item }) => <RenderItem exercise={item} getExercises={getExercises} />}
         keyExtractor={(item) => item._id}
       />
     </View>
@@ -62,14 +83,14 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    padding: 10,
+    padding: 8,
     backgroundColor: '#e3e3e3',
     borderRadius: 5,
     marginTop: 10,
   },
 
   btnText: {
-    fontSize: 16,
+    fontSize: 14,
     textAlign: 'center',
   },
 })
