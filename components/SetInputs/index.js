@@ -1,9 +1,9 @@
 import { TextInput, View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-const SetInputs = ({ sets }) => {
+const SetInputs = ({ sets, removeSet }) => {
   return sets.map((set, index) => (
-    <View style={styles.flex}>
+    <View style={styles.flex} key={set?._id}>
       <Text style={styles.center}>{index}</Text>
       <TextInput
         style={styles.center}
@@ -17,7 +17,7 @@ const SetInputs = ({ sets }) => {
         defaultValue={set?.reps.toString()}
         value={set?.reps.toString()}
       />
-      <TouchableOpacity style={styles.center} onPress={() => console.log(set?._id)}>
+      <TouchableOpacity style={styles.center} onPress={() => removeSet(set?._id)}>
         <Icon name="delete" size={16} color="#000" />
       </TouchableOpacity>
     </View>

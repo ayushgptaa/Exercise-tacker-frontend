@@ -29,13 +29,25 @@ const RenderItem = ({ exercise, getExercises }) => {
 
     if (response.status === 200) await getExercises()
   }
+
+  const removeSet = async (id) => {
+    console.log(id)
+    const config = {
+      method: 'delete',
+      url: `${API_URL}/workouts/remove-set/${id}`,
+    }
+
+    const response = await fetchReq(config)
+
+    if (response?.status === 200) await getExercises()
+  }
   return (
     <View style={styles.workout}>
       <View>
         <Text style={styles.name}>{exercise.name}</Text>
       </View>
 
-      <DisplaySets sets={exercise.sets} />
+      <DisplaySets sets={exercise.sets} removeSet={removeSet} />
 
       <TouchableOpacity style={styles.button} onPress={() => addNewSet()}>
         <Text style={styles.btnText}>Add set</Text>
