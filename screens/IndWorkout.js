@@ -13,8 +13,8 @@ import fetchReq from '../utils/fetchReq'
 
 const IndWorkout = ({ route }) => {
   const [exercises, setExercises] = useState([])
-  const { item } = route.params
-  const { _id, dayName, createdAt } = item
+  const { exercise } = route.params
+  const { _id, dayName, createdAt } = exercise
 
   const getExercises = async () => {
     const config = {

@@ -1,4 +1,4 @@
-import { Text, FlatList, View, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 
 import BoldText from '../BoldText'
 import DisplaySets from '../DisplaySets'
@@ -76,12 +76,9 @@ const DisplayExercises = ({ exercises, getExercises }) => {
         <BoldText>My workouts</BoldText>
       </View>
 
-      <FlatList
-        data={exercises}
-        renderItem={({ item }) => <RenderItem exercise={item} getExercises={getExercises} />}
-        keyExtractor={(item) => item._id}
-        horizontal={false}
-      />
+      {exercises.map((exercise) => {
+        return <RenderItem exercise={exercise} getExercises={getExercises} key={exercise?._id} />
+      })}
     </View>
   )
 }

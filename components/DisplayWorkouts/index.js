@@ -1,18 +1,18 @@
-import { Text, FlatList, View, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import BoldText from '../BoldText'
 
 import convertDate from '../../utils/convertDate'
 
-const RenderItem = ({ item, deleteWorkouts }) => {
+const RenderItem = ({ exercise, deleteWorkouts }) => {
   return (
     <View style={styles.workout}>
       <View>
-        <Text>Workout Name : {item.dayName}</Text>
-        <Text>Created at : {convertDate(item.createdAt)}</Text>
+        <Text>Workout Name : {exercise?.dayName}</Text>
+        <Text>Created at : {convertDate(exercise?.createdAt)}</Text>
       </View>
-      <TouchableOpacity onPress={() => deleteWorkouts(item._id)}>
+      <TouchableOpacity onPress={() => deleteWorkouts(exercise._id)}>
         <Icon name="delete" size={22} color="#000" />
       </TouchableOpacity>
     </View>
@@ -26,19 +26,17 @@ const DisplayWorkouts = ({ workouts, deleteWorkouts, navigation }) => {
         <BoldText>My workouts</BoldText>
       </View>
 
-      <FlatList
-        data={workouts}
-        renderItem={({ item }) => (
+      {workouts.map((exercise) => {
+        return (
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('IndWorkout', { item })
-            }}>
-            <RenderItem item={item} deleteWorkouts={deleteWorkouts} />
+              navigation.navigate('IndWorkout', { exercise })
+            }}
+            key={exercise?._id}>
+            <RenderItem exercise={exercise} deleteWorkouts={deleteWorkouts} />
           </TouchableOpacity>
-        )}
-        keyExtractor={(item) => item._id}
-        horizontal={false}
-      />
+        )
+      })}
     </View>
   )
 }
