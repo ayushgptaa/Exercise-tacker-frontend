@@ -1,13 +1,13 @@
-import { View, StyleSheet } from 'react-native'
+import { ScrollView, StyleSheet } from 'react-native'
 
 const Container = ({ children }) => {
-  return <View style={styles.container}>{children}</View>
+  return <ScrollView style={styles.container}>{children}</ScrollView>
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
-    margin: 25,
+    paddingTop: 60,
+    padding: 25,
   },
 })
 
