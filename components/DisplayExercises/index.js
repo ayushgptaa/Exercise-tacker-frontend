@@ -1,7 +1,8 @@
-import { Text, FlatList, View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, FlatList, View, StyleSheet, TouchableOpacity } from 'react-native'
 
 import BoldText from '../BoldText'
 import DisplaySets from '../DisplaySets'
+import IconComponent from '../IconComponent'
 
 import API_URL from '../../constant'
 
@@ -31,7 +32,6 @@ const RenderItem = ({ exercise, getExercises }) => {
   }
 
   const removeSet = async (id) => {
-    console.log(id)
     const config = {
       method: 'delete',
       url: `${API_URL}/workouts/remove-set/${id}`,
@@ -41,13 +41,26 @@ const RenderItem = ({ exercise, getExercises }) => {
 
     if (response?.status === 200) await getExercises()
   }
+
+  const removeExercise = async (id) => {
+    const config = {
+      method: 'delete',
+      url: `${API_URL}/workouts/remove-exercise/${id}`,
+    }
+
+    const response = await fetchReq(config)
+
+    if (response?.status === 200) await getExercises()
+  }
+
   return (
     <View style={styles.workout}>
-      <View>
+      <View style={styles.flex}>
         <Text style={styles.name}>{exercise.name}</Text>
+        <IconComponent name="delete" size={25} onPress={() => removeExercise(exercise?._id)} />
       </View>
 
-      <DisplaySets sets={exercise.sets} removeSet={removeSet} />
+      <DisplaySets sets={exercise.sets} removeSet={removeSet} getExercises={getExercises} />
 
       <TouchableOpacity style={styles.button} onPress={() => addNewSet()}>
         <Text style={styles.btnText}>Add set</Text>
@@ -67,6 +80,7 @@ const DisplayExercises = ({ exercises, getExercises }) => {
         data={exercises}
         renderItem={({ item }) => <RenderItem exercise={item} getExercises={getExercises} />}
         keyExtractor={(item) => item._id}
+        horizontal={false}
       />
     </View>
   )
@@ -75,10 +89,18 @@ const DisplayExercises = ({ exercises, getExercises }) => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
+    paddingBottom: 100,
+  },
+
+  flex: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 
   workout: {
-    flex: 1,
+    // flex: 1,
     flexGap: 30,
     borderWidth: 1,
     borderColor: '#c7c7c7',

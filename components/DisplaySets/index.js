@@ -6,7 +6,7 @@ const CenterText = ({ children }) => {
   return <Text style={styles.center}>{children}</Text>
 }
 
-const DisplaySets = ({ sets, removeSet }) => {
+const DisplaySets = ({ sets, removeSet, getExercises }) => {
   return (
     <View style={styles.container}>
       <View style={styles.flex}>
@@ -14,16 +14,17 @@ const DisplaySets = ({ sets, removeSet }) => {
         <CenterText>KG</CenterText>
         <CenterText>REPS</CenterText>
         <CenterText />
+        <CenterText />
       </View>
 
-      <SetInputs sets={sets} removeSet={removeSet} />
+      <SetInputs sets={sets} removeSet={removeSet} getExercises={getExercises} />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
+    marginTop: 15,
   },
 
   flex: {
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
   },
 
   center: {
-    textAlign: 'left',
+    textAlign: 'center',
     flex: 1,
     fontSize: 12,
   },
